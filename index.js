@@ -1,22 +1,22 @@
-var CSVWrite = /** @class */ (function () {
-    function CSVWrite(paymentColumns) {
-        this.paymentColumns = paymentColumns;
-        this.csv = this.paymentColumns.join(",") + "\n";
+var CSVWriter = /** @class */ (function () {
+    function CSVWriter(PaymentColumn) {
+        this.PaymentColumn = PaymentColumn;
+        this.cvs = PaymentColumn.join(",") + "\n";
     }
-    CSVWrite.prototype.save = function () {
-    };
-    CSVWrite.prototype.addRows = function (payments) {
+    CSVWriter.prototype.save = function () { };
+    CSVWriter.prototype.addRows = function (payments) {
         var _this = this;
-        var csvRows = payments.map(function (payment) { return _this.formatRow(payment); }).join("");
-        this.csv += csvRows;
-        console.log(this.csv);
+        var cvs = payments.map(function (payment) { return _this.formatRow(payment); }).join("");
+        this.cvs += cvs;
+        console.log(this.cvs);
     };
-    CSVWrite.prototype.formatRow = function (payment) {
-        return this.paymentColumns.map(function (col) { return payment[col]; }).join(",") + "\n";
+    CSVWriter.prototype.formatRow = function (payment) {
+        return this.PaymentColumn.map(function (col) { return payment[col]; }).join(",") + "\n";
     };
-    return CSVWrite;
+    return CSVWriter;
 }());
-var file1 = new CSVWrite(["id", "amount", "to", "notes"]); // Removed "base"
+var file1 = new CSVWriter(["id", "amount", "notes", "to"]);
 file1.addRows([
-    { id: 1, amount: 500, from: "myself", to: "Mutalibov", notes: "For birthday gift" },
+    { id: 1, amount: 9000, notes: "for breakfast", to: "Mutalibov" },
+    { id: 2, amount: 1000, notes: "for dinner", to: "Zuxriddin" },
 ]);
